@@ -11,7 +11,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { flexbox } from '@material-ui/system';
 import logo from '../img/EV_Logo_RGB_oReg.svg';
 
 const useStyles = makeStyles((theme) => ({
@@ -93,12 +92,12 @@ function Header() {
       <AppBar position="static"  className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} >
-            <a href="#">
+            <a href="menu-appbar">
               <img src={logo}  className={classes.logoImg} alt="Logo" />
             </a>
           </Typography>
 
-          <IconButton edge="start" className={classes.menuButton} color="#000000" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton}  aria-label="menu">
             <MenuIcon />
           </IconButton>
           {auth && (
