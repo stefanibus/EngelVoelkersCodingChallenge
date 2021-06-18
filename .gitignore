@@ -21,3 +21,18 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+### Internal comments and notes ###
+/stefano-intern/
+
+### dotenv ###
+.env
+.env.test
+.env*.local
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
