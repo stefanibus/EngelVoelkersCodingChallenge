@@ -1,12 +1,19 @@
-import './App.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
+import CssBaseline    from '@material-ui/core/CssBaseline';
+import Button         from '@material-ui/core/Button';
+import Checkbox       from '@material-ui/core/Checkbox';
+
+import Box            from '@material-ui/core/Box';
+
+import Container      from '@material-ui/core/Container';
+import Header         from './components/Header';
+import SimpleCard     from './components/SimpleCard';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
-import Container from '@material-ui/core/Container';
-import Header from './components/Header'
+import './App.css';
+import { spacing } from '@material-ui/system';
+
 
 const theme = createMuiTheme({
+  spacing: 8,
   typography: {
     fontFamily: [
       ' Inter ',
@@ -90,19 +97,24 @@ function App() {
     <div className="App">
       <Container maxWidth="xl">
           <Header/>
-          <div>Searchfield</div>
+          <div    id="sortThis">Searchfield</div>
           <Checkbox  defaultChecked  />
           <Checkbox  defaultChecked  />
           <Checkbox  defaultChecked  />
           <div>Sort by Name</div>
-          <div>CARDS
-            <Button variant="contained" color="primary">primary To Go</Button>
-            <Button variant="contained" className="nix" color="secondary"> Button</Button>
+          <div >
+            <SimpleCard />
+            <SimpleCard />
 
-            <div>(Agent / Property / Shop )-Image Pseudoelement  </div>
-            <div>(Agent / Property / Shop )-Name</div>
-            <div>Adress: </div>
-            <div>Telefone: </div>
+            <Box  my={ theme.spacing(2)}  >
+
+              <Button variant="contained" color="primary">primary color</Button>
+              <Button variant="contained" className="nix" color="secondary">secondary color</Button>
+              <div>Image Pseudoelement: (Agent / Property / Shop ) </div>
+              <div>Name: (Agent / Property / Shop )</div>
+              <div>Adress: </div>
+              <div>Telefone: </div>
+            </Box>
           </div>
       </Container>
     </div>

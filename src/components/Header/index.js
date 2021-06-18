@@ -92,7 +92,7 @@ function Header() {
       <AppBar position="static"  className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} >
-            <a href="menu-appbar">
+            <a href="#sortThis">
               <img src={logo}  className={classes.logoImg} alt="Logo" />
             </a>
           </Typography>
