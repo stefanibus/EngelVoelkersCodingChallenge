@@ -57,7 +57,6 @@ mergedArray: [
 }
 
 
-
 function List() {
 
  const theme = useTheme();
@@ -69,15 +68,22 @@ function List() {
       <Checkbox  defaultChecked  />
       <Checkbox  defaultChecked  />
       <div>Sort by Name</div>
-      <SimpleCard dummydata={dummydata}/>
-      <SimpleCard  dummydata={dummydata}/>
+            {dummydata?
+
+              dummydata.mergedArray.map((dummy, index) => {
+              return (
+                <SimpleCard
+                  key={index}
+                  dummy={dummy}
+                />
+              );
+            })
+              :
+              'no Data'
+            }
+
       <Box my={theme.spacing(2)}>
-        <Button variant="contained" color="primary">primary color</Button>
-        <Button variant="contained" className="nix" color="secondary">secondary color</Button>
-        <div>Image Pseudoelement: (Agent / Property / Shop ) </div>
-        <div>Name: (Agent / Property / Shop )</div>
-        <div>Adress: </div>
-        <div>Telefone: </div>
+
       </Box>
     </>
   );

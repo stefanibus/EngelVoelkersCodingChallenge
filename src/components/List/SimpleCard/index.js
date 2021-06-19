@@ -3,7 +3,6 @@ import clsx               from 'clsx';
 import { makeStyles }     from '@material-ui/core/styles';
 import Card               from '@material-ui/core/Card';
 import CardHeader         from '@material-ui/core/CardHeader';
-import CardMedia          from '@material-ui/core/CardMedia';
 import CardContent        from '@material-ui/core/CardContent';
 import CardActions        from '@material-ui/core/CardActions';
 import Collapse           from '@material-ui/core/Collapse';
@@ -44,9 +43,21 @@ const useStyles = makeStyles((ev_theme) => ({
   avatar: {
     backgroundColor: ev_theme.palette.primary.main,
   },
+  phone: {
+    color: 'inherit',
+  },
+  blurredInfo: {
+    color: 'lightgrey',
+    opacity: '.4',
+  },
+  noInfo: {
+    display: 'none',
+  },
 }));
 
-function SimpleCard({dummydata}) {
+function SimpleCard({dummy}) {
+
+  console.log('dummy: ', dummy)
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -55,16 +66,17 @@ function SimpleCard({dummydata}) {
     setExpanded(!expanded);
   };
 
-  const avatarType = () => {
-    const type =  dummydata.mergedArray[0].type
-
-    // Improoved Switch Statement https://stackoverflow.com/questions/6114210/is-returning-out-of-a-switch-statement-considered-a-better-practice-than-using-b
+  const avatarType = (type) => { // Improoved Switch Statement inspired from:  https://stackoverflow.com/questions/6114210/is-returning-out-of-a-switch-statement-considered-a-better-practice-than-using-b
     return (({
-      'agent':  <Person /> ,
-      'shop':  <Home /> ,
-      'store':  <Store />
+      'agent':  <Person alt="agent" /> ,
+      'shop':  <Home  alt="shop" /> ,
+      'property':  <Store  alt="property" />
     })[type] ?? <HelpIcon />)
+  }
 
+  const dateShow = (d) => {
+      const res = d.substring(0, 10);
+      return(res);
   }
 
   return (
@@ -72,7 +84,7 @@ function SimpleCard({dummydata}) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar} >
-           {dummydata?   avatarType()  : 'no data'}
+           {avatarType(dummy.type)}
           </Avatar>
         }
         action={
@@ -80,19 +92,24 @@ function SimpleCard({dummydata}) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        title={dummy.name}
+        subheader={dateShow(dummy.createdAt)}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
+
+        {dummy.address ?
+            <Typography variant="body2" color="textSecondary" component="p">
+                 {'Postal Adress: '+dummy.address}
+            </Typography>
+          :  <span className={classes.noInfo}>No Postal Adress </span>
+        }
+
+        {dummy.shop ?
+            <Typography variant="body2" color="textSecondary" component="p">
+                 {'Shop Information: '+dummy.shop}
+            </Typography>
+          : <span className={classes.noInfo}>No Shop Adress</span>
+        }
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -100,11 +117,17 @@ function SimpleCard({dummydata}) {
                <FavoriteIcon />
             </Tooltip>
         </IconButton>
+      {dummy.phone ?
         <IconButton aria-label="share">
             <Tooltip title="Call now" enterDelay={500} leaveDelay={200}>
-              <PhoneForwardedIcon   />
+              <a href={'tel:'+dummy.phone} className={classes.phone}  >
+                <PhoneForwardedIcon   />
+              </a>
             </Tooltip>
         </IconButton>
+        : ''
+      }
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -119,7 +142,10 @@ function SimpleCard({dummydata}) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Details can be accessed quickly.
+            Details:<br/>
+            {dummy.phone ?  `Phone Number:  ${dummy.phone}.`   :           <span className={classes.blurredInfo}>No Phone Number available for  {dummy.type}-Members.</span> } <br/>
+            {dummy.address ?  `Postal Address:       ${dummy.address}.`  : <span className={classes.blurredInfo}>No Adress       available for {dummy.type}-Members.</span> } <br/>
+            {dummy.shop ?  `Shop Info:       ${dummy.shop}.`  :            <span className={classes.blurredInfo}>No Shop-Info       available for {dummy.type}-Members.</span> }
           </Typography>
           <Typography paragraph>
             What sort of Insights might be helpful inside of a dropown, if at all?

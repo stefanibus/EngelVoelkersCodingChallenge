@@ -35,8 +35,8 @@ function App() {
     <CssBaseline />
     <div className="App">
       <Container maxWidth="xl">
-          <Header/>
-            List test <List/>
+        <Header/>
+        <List/>
       </Container>
     </div>
    </ThemeProvider>
