@@ -18,17 +18,19 @@ import Person             from '@material-ui/icons/Person';
 import Store              from '@material-ui/icons/Home';
 import Home               from '@material-ui/icons/Store';
 import HelpIcon           from '@material-ui/icons/Help';
+import { useTheme }       from '@material-ui/core/styles';
+
+import json2mq from 'json2mq';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+
 
 
 const useStyles = makeStyles((ev_theme) => ({
   root: {
     maxWidth: 645,
     margin: '0 auto',
-    marginTop: '1.3rem',
-  },
-  media: {
-    height: 0,
-    paddingTop: '.25%',
+    marginTop: '1rem',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -53,9 +55,25 @@ const useStyles = makeStyles((ev_theme) => ({
   noInfo: {
     display: 'none',
   },
+  mtMinus50: {
+      marginTop: '-5px',
+  },
+  mtMinus15: {
+      marginTop: '-1px',
+  },
 }));
 
 function SimpleCard({dummy}) {
+
+  const theme = useTheme();
+
+   const matches = useMediaQuery(
+    json2mq({
+      minWidth: 600,
+    }),
+  );
+
+
 
   console.log('dummy: ', dummy)
 
@@ -96,7 +114,6 @@ function SimpleCard({dummy}) {
         subheader={dateShow(dummy.createdAt)}
       />
       <CardContent>
-
         {dummy.address ?
             <Typography variant="body2" color="textSecondary" component="p">
                  {'Postal Adress: '+dummy.address}
@@ -111,7 +128,7 @@ function SimpleCard({dummy}) {
           : <span className={classes.noInfo}>No Shop Adress</span>
         }
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing className={matches ?   classes.mtMinus50 :  classes.mtMinus15  } >
         <IconButton aria-label="add to favorites">
             <Tooltip title="no func here" enterDelay={500} leaveDelay={200}>
                <FavoriteIcon />
@@ -142,13 +159,13 @@ function SimpleCard({dummy}) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Details:<br/>
-            {dummy.phone ?  `Phone Number:  ${dummy.phone}.`   :           <span className={classes.blurredInfo}>No Phone Number available for  {dummy.type}-Members.</span> } <br/>
-            {dummy.address ?  `Postal Address:       ${dummy.address}.`  : <span className={classes.blurredInfo}>No Adress       available for {dummy.type}-Members.</span> } <br/>
-            {dummy.shop ?  `Shop Info:       ${dummy.shop}.`  :            <span className={classes.blurredInfo}>No Shop-Info       available for {dummy.type}-Members.</span> }
+               {dummy.phone ?  `Phone Number:  ${dummy.phone}.` : <span className={classes.blurredInfo}>No Phone Number available for  {dummy.type}-Members.</span> }
           </Typography>
           <Typography paragraph>
-            What sort of Insights might be helpful inside of a dropown, if at all?
+               {dummy.address ?  <span className={classes.blurredInfo}>See above for Postal Adress.</span>  : <span className={classes.blurredInfo}>No Adress available for {dummy.type}-Members.</span> }
+          </Typography>
+          <Typography paragraph>
+               {dummy.shop ?  <span className={classes.blurredInfo}>See above for Shop Info.</span> :  <span className={classes.blurredInfo}>No Shop-Info available for {dummy.type}-Members.</span> }
           </Typography>
         </CardContent>
       </Collapse>

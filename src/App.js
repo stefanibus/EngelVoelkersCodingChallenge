@@ -7,6 +7,24 @@ import './App.css';
 
 
 const ev_theme = createMuiTheme({
+      overrides: {
+      MuiCardHeader: {
+        root: {
+          padding: 13,
+          "&:last-child": {
+            paddingBottom: 0,
+         },
+        },
+      },
+      MuiCardContent: {
+        root: {
+          padding: 12,
+          "&:last-child": {
+            paddingBottom: 0,
+         },
+        },
+      },
+    },
   spacing: 8,
   typography: {
     fontFamily: [
