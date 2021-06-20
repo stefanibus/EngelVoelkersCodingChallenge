@@ -18,10 +18,7 @@ import Person             from '@material-ui/icons/Person';
 import Store              from '@material-ui/icons/Home';
 import Home               from '@material-ui/icons/Store';
 import HelpIcon           from '@material-ui/icons/Help';
-import { useTheme }       from '@material-ui/core/styles';
 
-import json2mq from 'json2mq';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 
@@ -55,27 +52,17 @@ const useStyles = makeStyles((ev_theme) => ({
   noInfo: {
     display: 'none',
   },
-  mtMinus50: {
+  mtMinus5: {
       marginTop: '-5px',
-  },
-  mtMinus15: {
-      marginTop: '-1px',
   },
 }));
 
 function SimpleCard({dummy}) {
 
-  const theme = useTheme();
 
-   const matches = useMediaQuery(
-    json2mq({
-      minWidth: 600,
-    }),
-  );
-
-
-
+ //
   console.log('dummy: ', dummy)
+
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -128,7 +115,7 @@ function SimpleCard({dummy}) {
           : <span className={classes.noInfo}>No Shop Adress</span>
         }
       </CardContent>
-      <CardActions disableSpacing className={matches ?   classes.mtMinus50 :  classes.mtMinus15  } >
+      <CardActions disableSpacing className={classes.mtMinus5 } >
         <IconButton aria-label="add to favorites">
             <Tooltip title="no func here" enterDelay={500} leaveDelay={200}>
                <FavoriteIcon />
