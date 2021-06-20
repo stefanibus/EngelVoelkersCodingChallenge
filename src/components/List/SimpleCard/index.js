@@ -60,10 +60,6 @@ const useStyles = makeStyles((ev_theme) => ({
 function SimpleCard({dummy}) {
 
 
- //
-  console.log('dummy: ', dummy)
-
-
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

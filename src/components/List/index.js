@@ -4,15 +4,27 @@ import Checkbox       from '@material-ui/core/Checkbox';
 import SimpleCard     from './SimpleCard';
 import { useTheme }   from '@material-ui/core/styles';
 import dummy_data     from  '../../assets/dummydata.js';
+import SearchForName  from './SearchForName';
 
 
 function List() {
 
  const theme = useTheme();
 
+
+
+    const NameList = dummy_data.mergedArray
+    ? dummy_data.mergedArray.map((generalName, index) => {
+        return( generalName.name);
+      })
+    : ['listOfNames has no data'];
+
+
   return (
     <>
-      <div id="sortThis">Searchfield</div>
+      <Box id="sortThis">
+        <SearchForName listOfNames={NameList} />
+      </Box>
       <Checkbox  defaultChecked  />
       <Checkbox  defaultChecked  />
       <Checkbox  defaultChecked  />
