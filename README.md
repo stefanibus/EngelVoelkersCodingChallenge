@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Frontend ReactJS Coding Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was build as a [ Frontend ReactJS Coding Challenge](https://docs.google.com/document/d/1BXD-eZURPT36kGZyk_Zw5kRn92jtqNkFzg59RYABZPI/edit#) with Engel Voelkers.
+
 
 ## Available Scripts
 
