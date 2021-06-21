@@ -24,7 +24,7 @@ function List() {
 
   // toggle State
   const updateAgents = () => {setCheckedAgents(t => !t); };
-  const updateShops = () => {checkedShops(t => !t); };
+  const updateShops = () => {setCheckedShops(t => !t); };
   const updateProperties = () => {setCheckedProperties(t => !t); };
   const toggleSort = () => { setSorting(s => !s); };
 
