@@ -6,20 +6,27 @@ import { useTheme }                     from '@material-ui/core/styles';
 import all_data                         from  '../../assets/dummydata.js';
 import SearchForName                    from './SearchForName';
 import FormControlLabel                 from '@material-ui/core/FormControlLabel';
+import SortByAlphaIcon                  from '@material-ui/icons/SortByAlpha';
+import { makeStyles }                   from '@material-ui/core/styles';
+
 
 function List() {
 
+  // state variable
   const [checkedAgents, setCheckedAgents] = useState(true);
-  const updateAgents = (e) => {setCheckedAgents(!checkedAgents); };
   const [checkedShops, setCheckedShops] = useState(true);
-  const updateShops = () => {setCheckedShops(!checkedShops)};
   const [checkedProperties, setCheckedProperties] = useState(true);
-  const updateProperties = () => setCheckedProperties(!checkedProperties);
   const [resultList, setResultList] = useState(all_data);
   const [filteredList, setFilteredList] = useState(all_data);
   const [inputValue, setInputValue]   = useState('')
   const [listOfNames, setListOfNames] = useState([]);
-  const theme = useTheme();
+  const [sorting, setSorting] = useState(false);
+
+  // toggle State
+  const updateAgents = () => {setCheckedAgents(t => !t); };
+  const updateShops = () => {checkedShops(t => !t); };
+  const updateProperties = () => {setCheckedProperties(t => !t); };
+  const toggleSort = () => { setSorting(s => !s); };
 
 
   useEffect(() => {
@@ -57,6 +64,10 @@ function List() {
     }
   }, [checkedAgents, checkedShops , checkedProperties, filteredList.whenToUpdateProp]);
 
+
+
+
+
   // apply Iputfield-Data from Autocomplete Dropdown
   const showSearchResult = (passedNameValue) => {
     if (passedNameValue === null) {
@@ -69,6 +80,32 @@ function List() {
       setResultList({'mergedArray' :  result})
     }
   }
+
+  // sort the resultList
+      const sortResult  = (sorting) => {
+           if (sorting){
+              let sorted = resultList.mergedArray.sort((a, b) => a.name.localeCompare(b.name))
+           } else {
+              let sorted = resultList.mergedArray.sort((b, a) => a.name.localeCompare(b.name))
+           }
+          toggleSort()
+        };
+
+
+    const useStyles = makeStyles((ev_theme) => ({
+      sorting: {
+        textAlign: 'right',
+        maxWidth: '645px',
+        margin: '0 auto',
+
+      }
+    }));
+
+    // theme
+    const theme = useTheme();
+    const classes = useStyles();
+
+
 
   return (
     <>
@@ -93,7 +130,7 @@ function List() {
         <Checkbox name="properties" />} label="Properties"  checked={checkedProperties} onChange={(e) => { updateProperties(e)}}
       />
 
-      {/*<div>Sort by Name</div>*/}
+       <div  onClick={() => {sortResult(sorting)}}  className={classes.sorting}  >Sort by Name  <SortByAlphaIcon /> </div>
             {resultList? resultList.mergedArray.map((dummy, index) => {
               return (
                 <SimpleCard
