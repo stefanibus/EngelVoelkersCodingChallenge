@@ -1,6 +1,7 @@
 
 
-const dummy_data = {
+const all_data = {
+whenToUpdateProp: true,
 mergedArray: [
     {
       "type": "agent",
@@ -51,4 +52,4 @@ mergedArray: [
 }
 
 
-export default dummy_data
+export default all_data

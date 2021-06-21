@@ -44,6 +44,8 @@ const useStyles = makeStyles((ev_theme) => ({
   },
   phone: {
     color: 'inherit',
+    height: '1em',
+    width: '1em',
   },
   blurredInfo: {
     color: 'lightgrey',

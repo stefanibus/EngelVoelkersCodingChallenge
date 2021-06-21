@@ -1,7 +1,7 @@
  /* eslint-disable no-use-before-define */
-import React        from 'react';
-import TextField    from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import React              from 'react';
+import TextField          from '@material-ui/core/TextField';
+import Autocomplete       from '@material-ui/lab/Autocomplete';
 import { makeStyles }     from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -11,23 +11,28 @@ const useStyles = makeStyles({
     marginTop: '1rem',
     width: '100%',
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      // borderColor: "green",
       borderRadius: '99px',
     }
   }
 });
 
-function SearchForName({listOfNames}) {
+function SearchForName({listOfNames, showSearchResult, setInputValue, inputValue}) {
 
   const classes = useStyles();
 
   return (
     <Autocomplete
       id="combo-box-demo"
+      // inputValue={inputValue?   inputValue.name : ''}
       options={listOfNames}
-      getOptionLabel={(option) => option}
+      key={listOfNames}
+      getOptionLabel={(option) => option.name}
+      onChange={(event, newInputValue) => {
+        setInputValue(newInputValue)
+        showSearchResult(newInputValue);
+      }}
       style={{ width: '100%', margin: '0 auto'  }}
-      renderInput={(params) => <TextField {...params} label="Search by Name" variant="outlined" className={classes.root} />}
+      renderInput={(params) => <TextField {...params} label="Search for Name" variant="outlined" className={classes.root} />}
     />
   );
 }
