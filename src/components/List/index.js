@@ -22,19 +22,23 @@ function List() {
   const theme = useTheme();
 
   useEffect(() => {
-   // refresh Names in the Autocomplete-Dropdown --> called ListOfNames
+   // refresh the Autocomplete-Dropdown Conten -->  ListOfNames
       setListOfNames(filteredList.mergedArray.map((generalName, index) =>
         {return ({'name':generalName.name,'index ': index})} ));
-   // refresh Resultlist
+   // refresh Resultlist if the filtered List has changed
       setResultList(filteredList)
   }, [filteredList]);
 
 
   useEffect(  () => {
- // Three Checkboxes
+ // all Three Checkboxes are checked
     if ((!checkedAgents === false) &&  (!checkedShops === false) &&  (!checkedProperties === false) )  {
  // Show the full list if all types are selected
       setFilteredList(all_data)
+    }
+ // none of the three checkboxes are selected
+    else if ((!checkedAgents === true) &&  (!checkedShops === true) &&  (!checkedProperties === true) ) {
+      setFilteredList({'mergedArray' :  [] }) // console.log('empty array --> nothing is selected  ')
     }
     else {
  // Show a filtered list if only some types are selected
@@ -43,10 +47,10 @@ function List() {
        let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
        let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
        // filter
-       let result = await   filteredList.mergedArray.filter(function (item) {
+       let result =    all_data.mergedArray.filter(function (item) {
               return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
             });
-      setFilteredList({'mergedArray' :  result})
+     await setFilteredList({'mergedArray' :  result})
       }
       fetchData();
     }
