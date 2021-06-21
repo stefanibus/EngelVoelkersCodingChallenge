@@ -21,10 +21,11 @@ function List() {
   const [listOfNames, setListOfNames] = useState([]);
   const theme = useTheme();
 
+
   useEffect(() => {
    // refresh the Autocomplete-Dropdown Conten -->  ListOfNames
       setListOfNames(filteredList.mergedArray.map((generalName, index) =>
-        {return ({'name':generalName.name,'index ': index})} ));
+        {return ({'name':generalName.name,'type': generalName.type,'index ': index})}));
    // refresh Resultlist if the filtered List has changed
       setResultList(filteredList)
   }, [filteredList]);

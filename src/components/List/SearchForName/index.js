@@ -20,11 +20,21 @@ function SearchForName({listOfNames, showSearchResult, setInputValue, inputValue
 
   const classes = useStyles();
 
+  // group listOfNames Entries, see https://material-ui.com/components/autocomplete/#grouped
+  const options = listOfNames.map((option) => {
+    const   typeGroup = option.type;
+    return {
+      typeGroup: /[0-9]/.test(typeGroup) ? '0-9' : typeGroup,
+      ...option,
+    };
+  });
+
   return (
     <Autocomplete
       id="combo-box-demo"
       // inputValue={inputValue?   inputValue.name : ''}
-      options={listOfNames}
+      options={options.sort((a, b) => -b.typeGroup)}
+      groupBy={(option) => option.typeGroup}
       key={listOfNames}
       getOptionLabel={(option) => option.name}
       onChange={(event, newInputValue) => {
