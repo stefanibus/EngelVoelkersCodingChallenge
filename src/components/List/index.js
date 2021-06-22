@@ -8,7 +8,7 @@ import SearchForName                    from './SearchForName';
 import FormControlLabel                 from '@material-ui/core/FormControlLabel';
 import SortByAlphaIcon                  from '@material-ui/icons/SortByAlpha';
 import { makeStyles }                   from '@material-ui/core/styles';
-
+import Api                              from '../../api/index';
 
 function List() {
 
@@ -16,8 +16,9 @@ function List() {
   const [checkedAgents, setCheckedAgents] = useState(true);
   const [checkedShops, setCheckedShops] = useState(true);
   const [checkedProperties, setCheckedProperties] = useState(true);
-  const [resultList, setResultList] = useState(all_data);
-  const [filteredList, setFilteredList] = useState(all_data);
+  const [full_data, setFull_data] = useState(all_data); //
+  const [resultList, setResultList] = useState( all_data );  //
+  const [filteredList, setFilteredList] = useState( all_data ); //
   const [inputValue, setInputValue]   = useState('')
   const [listOfNames, setListOfNames] = useState([]);
   const [sorting, setSorting] = useState(false);
@@ -27,6 +28,17 @@ function List() {
   const updateShops = () => {setCheckedShops(t => !t); };
   const updateProperties = () => {setCheckedProperties(t => !t); };
   const toggleSort = () => { setSorting(s => !s); };
+
+
+  useEffect( () => {
+    Api.getAllData(setFull_data);
+  }, []);
+
+  useEffect(() => {
+        setResultList(full_data)
+        setFilteredList(full_data)
+  }, [full_data]);
+
 
 
   useEffect(() => {
@@ -42,7 +54,7 @@ function List() {
  // all Three Checkboxes are checked
     if ((!checkedAgents === false) &&  (!checkedShops === false) &&  (!checkedProperties === false) )  {
  // Show the full list if all types are selected
-      setFilteredList(all_data)
+      setFilteredList(full_data)
     }
  // none of the three checkboxes are selected
     else if ((!checkedAgents === true) &&  (!checkedShops === true) &&  (!checkedProperties === true) ) {
@@ -55,14 +67,14 @@ function List() {
        let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
        let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
        // filter
-       let result =    all_data.mergedArray.filter(function (item) {
+       let result =    full_data.mergedArray.filter(function (item) {
               return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
             });
      await setFilteredList({'mergedArray' :  result})
       }
       fetchData();
     }
-  }, [checkedAgents, checkedShops , checkedProperties, filteredList.whenToUpdateProp]);
+  }, [checkedAgents, checkedShops , checkedProperties, full_data.whenToUpdateProp]);
 
 
 
