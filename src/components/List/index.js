@@ -52,12 +52,14 @@ function List() {
 
   useEffect(  () => {
      // all Three Checkboxes are checked
-    if (( checkedAgents === true) &&  ( checkedShops === true) &&  ( checkedProperties === true) )  {
+    if ((checkedAgents) && (checkedShops) && (checkedProperties))  {
+      console.log('all checked')
        // Show the full list if all types are selected
        setFilteredList(fullData)
     }
      // none of the three checkboxes are selected
-    else if ((!checkedAgents === true) &&  (!checkedShops === true) &&  (!checkedProperties === true) ) {
+    else if ((!checkedAgents) && (!checkedShops) && (!checkedProperties)) {
+      console.log('all UNchecked')
        setFilteredList({'mergedArray' :  [] }) // console.log('empty array --> nothing is selected  ')
     }
     else {
@@ -93,12 +95,12 @@ function List() {
     }
   }
 
-  // sort the resultList
+      // sort the resultList
       const sortResult  = (sorting) => {
-           if (sorting){
-              let sorted = resultList.mergedArray.sort((a, b) => a.name.localeCompare(b.name))
-           } else {
-              let sorted = resultList.mergedArray.sort((b, a) => a.name.localeCompare(b.name))
+           // console.log('always (can still be improoved with a closure e.g. )')
+           resultList.mergedArray.sort((b, a) => a.name.localeCompare(b.name))
+           if (sorting){ //  console.log('reverse the array ')
+           resultList.mergedArray.reverse()
            }
           toggleSort()
         };
