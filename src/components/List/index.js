@@ -62,7 +62,7 @@ function List() {
     }
     else {
        // Show a filtered list if only some types are selected
-        async function fetchData() {
+          function fetchData() {
            let agents     =  () => {if (checkedAgents)     { return 'agent' } else {return  'ExcludeAgentData' }}
            let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
            let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
@@ -70,7 +70,7 @@ function List() {
            let result =    fullData.mergedArray.filter(function (item) {
                   return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
                 });
-           await setFilteredList({'mergedArray' :  result})
+             setFilteredList({'mergedArray' :  result})
          }
         fetchData();
     }
