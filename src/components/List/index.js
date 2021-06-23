@@ -53,28 +53,23 @@ function List() {
   useEffect(  () => {
      // all Three Checkboxes are checked
     if ((checkedAgents) && (checkedShops) && (checkedProperties))  {
-      console.log('all checked')
-       // Show the full list if all types are selected
        setFilteredList(fullData)
     }
      // none of the three checkboxes are selected
     else if ((!checkedAgents) && (!checkedShops) && (!checkedProperties)) {
-      console.log('all UNchecked')
-       setFilteredList({'mergedArray' :  [] }) // console.log('empty array --> nothing is selected  ')
+       setFilteredList({'mergedArray' :  [] })
     }
+     // only some types are selected --> Show a filtered list ;
     else {
-       // Show a filtered list if only some types are selected
-          function fetchData() {
-           let agents     =  () => {if (checkedAgents)     { return 'agent' } else {return  'ExcludeAgentData' }}
-           let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
-           let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
-           // filter
-           let result =    fullData.mergedArray.filter(function (item) {
-                  return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
-                });
-             setFilteredList({'mergedArray' :  result})
-         }
-        fetchData();
+       let result =    fullData.mergedArray.filter(function (item) {
+              return  (  item.type === (checkedAgents && 'agent')
+                         ||
+                         item.type ===  (checkedShops && 'shop')
+                        ||
+                         item.type ===  (checkedProperties && 'property')
+                      );
+            });
+         setFilteredList({'mergedArray' :  result})
     }
   }, [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
 
