@@ -24,19 +24,19 @@ function List() {
   const [sorting, setSorting] = useState(false);
 
   // toggle State
-  const updateAgents = () => {setCheckedAgents(t => !t); };
-  const updateShops = () => {setCheckedShops(t => !t); };
-  const updateProperties = () => {setCheckedProperties(t => !t); };
-  const toggleSort = () => { setSorting(s => !s); };
+  const updateAgents = () =>     {setCheckedAgents(t => !t)}
+  const updateShops = () =>      {setCheckedShops(t => !t)}
+  const updateProperties = () => {setCheckedProperties(t => !t)}
+  const toggleSort = () =>       {setSorting(s => !s)}
 
 
-  useEffect( () => {
-    Api.getAllData(setFull_data);
+  useEffect(   () => {
+     Api.getAllData().then(setFull_data) // equals to ==>  Api.getAllData().then( (res) => {setFull_data(res)});
   }, []);
 
   useEffect(() => {
-        setResultList(full_data)
-        setFilteredList(full_data)
+      setResultList(full_data)
+      setFilteredList(full_data)
   }, [full_data]);
 
 
@@ -51,28 +51,28 @@ function List() {
 
 
   useEffect(  () => {
- // all Three Checkboxes are checked
-    if ((!checkedAgents === false) &&  (!checkedShops === false) &&  (!checkedProperties === false) )  {
- // Show the full list if all types are selected
-      setFilteredList(full_data)
+     // all Three Checkboxes are checked
+    if (( checkedAgents === true) &&  ( checkedShops === true) &&  ( checkedProperties === true) )  {
+       // Show the full list if all types are selected
+       setFilteredList(full_data)
     }
- // none of the three checkboxes are selected
+     // none of the three checkboxes are selected
     else if ((!checkedAgents === true) &&  (!checkedShops === true) &&  (!checkedProperties === true) ) {
-      setFilteredList({'mergedArray' :  [] }) // console.log('empty array --> nothing is selected  ')
+       setFilteredList({'mergedArray' :  [] }) // console.log('empty array --> nothing is selected  ')
     }
     else {
- // Show a filtered list if only some types are selected
-      async function fetchData() {
-       let agents     =  () => {if (checkedAgents)     { return 'agent' } else {return  'ExcludeAgentData' }}
-       let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
-       let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
-       // filter
-       let result =    full_data.mergedArray.filter(function (item) {
-              return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
-            });
-     await setFilteredList({'mergedArray' :  result})
-      }
-      fetchData();
+       // Show a filtered list if only some types are selected
+        async function fetchData() {
+           let agents     =  () => {if (checkedAgents)     { return 'agent' } else {return  'ExcludeAgentData' }}
+           let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
+           let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
+           // filter
+           let result =    full_data.mergedArray.filter(function (item) {
+                  return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
+                });
+           await setFilteredList({'mergedArray' :  result})
+         }
+        fetchData();
     }
   }, [checkedAgents, checkedShops , checkedProperties, full_data.whenToUpdateProp]);
 
@@ -116,7 +116,6 @@ function List() {
     // theme
     const theme = useTheme();
     const classes = useStyles();
-
 
 
   return (

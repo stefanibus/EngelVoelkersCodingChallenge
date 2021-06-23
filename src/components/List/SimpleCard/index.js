@@ -115,13 +115,13 @@ function SimpleCard({dummy}) {
       </CardContent>
       <CardActions disableSpacing className={classes.mtMinus5 } >
         <IconButton aria-label="add to favorites">
-            <Tooltip title="no func here" enterDelay={500} leaveDelay={200}>
+            <Tooltip title="no func here" enterDelay={400} leaveDelay={200}>
                <FavoriteIcon />
             </Tooltip>
         </IconButton>
       {dummy.phone ?
         <IconButton aria-label="share">
-            <Tooltip title="Call now" enterDelay={500} leaveDelay={200}>
+            <Tooltip title="Call now" enterDelay={400} leaveDelay={200}>
               <a href={'tel:'+dummy.phone} className={classes.phone}  >
                 <PhoneForwardedIcon   />
               </a>
