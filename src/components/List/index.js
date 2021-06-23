@@ -76,7 +76,6 @@ function List() {
 
 
 
-
   // apply Iputfield-Data from Autocomplete Dropdown
   const showSearchResult = (passedNameValue) => {
     if (passedNameValue === null) {
@@ -84,17 +83,16 @@ function List() {
        setResultList(filteredList)
     }
     else {
-      // if filtervalue exists --> show that one Entry
+      // if filtervalue exists --> show that single Entry
       const result =  filteredList.mergedArray.filter( item => item.name  ===  passedNameValue.name )
       setResultList({'mergedArray' :  result})
     }
   }
 
       // sort the resultList
-      const sortResult  = (sorting) => {
-           // console.log('always (can still be improoved with a closure e.g. )')
+      const sortResult  = (sorting) => { // console.log('sort will always be performed (this  might be improoved further , e.g. with a closure?)')
            resultList.mergedArray.sort((b, a) => a.name.localeCompare(b.name))
-           if (sorting){ //  console.log('reverse the array ')
+           if (sorting){ //  console.log('reverse the array on every second click ')
            resultList.mergedArray.reverse()
            }
           toggleSort()
@@ -106,7 +104,14 @@ function List() {
         textAlign: 'right',
         maxWidth: '645px',
         margin: '0 auto',
-
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        display: 'flex',
+          "& p": {
+           height: '1em ',
+           cursor: 'pointer',
+           marginRight: '.5em'
+         },
       }
     }));
 
@@ -138,7 +143,10 @@ function List() {
         <Checkbox name="properties" />} label="Properties"  checked={checkedProperties} onChange={(e) => { updateProperties(e)}}
       />
 
-       <div  onClick={() => {sortResult(sorting)}}  className={classes.sorting}  >Sort by Name  <SortByAlphaIcon /> </div>
+       <div  onClick={() => {sortResult(sorting)}}  className={classes.sorting}>
+           <p>Sort by Name:</p>
+           <SortByAlphaIcon />
+       </div>
             {resultList? resultList.mergedArray.map((dummy, index) => {
               return (
                 <SimpleCard

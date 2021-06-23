@@ -69,7 +69,7 @@ function SimpleCard({dummy}) {
     setExpanded(!expanded);
   };
 
-  const avatarType = (type) => { // Improoved Switch Statement inspired from:  https://stackoverflow.com/questions/6114210/is-returning-out-of-a-switch-statement-considered-a-better-practice-than-using-b
+  const avatarType = (type) => { // replaced Switch Statement by an object, that was inspired by:  https://stackoverflow.com/questions/6114210/is-returning-out-of-a-switch-statement-considered-a-better-practice-than-using-b
     return (({
       'agent':  <Person alt="agent" /> ,
       'shop':  <Home  alt="shop" /> ,
