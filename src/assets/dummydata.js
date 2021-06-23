@@ -1,6 +1,6 @@
 
 
-const all_data = {
+const spinnerLoadingData = {
 whenToUpdateProp: true,
 mergedArray: [
     {
@@ -52,4 +52,4 @@ mergedArray: [
 }
 
 
-export default all_data
+export default spinnerLoadingData

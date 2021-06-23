@@ -6,7 +6,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 
 
-const ev_theme = createMuiTheme({
+const evTheme = createMuiTheme({
       overrides: {
       MuiCardHeader: {
         root: {
@@ -49,7 +49,7 @@ const ev_theme = createMuiTheme({
 function App() {
 
   return (
-   <ThemeProvider theme={ev_theme}>
+   <ThemeProvider theme={evTheme}>
     <CssBaseline />
     <div className="App">
       <Container maxWidth="xl">

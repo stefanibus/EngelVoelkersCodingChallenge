@@ -23,7 +23,7 @@ import HelpIcon           from '@material-ui/icons/Help';
 
 
 
-const useStyles = makeStyles((ev_theme) => ({
+const useStyles = makeStyles((evTheme) => ({
   root: {
     maxWidth: 645,
     margin: '0 auto',
@@ -32,15 +32,15 @@ const useStyles = makeStyles((ev_theme) => ({
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
-    transition: ev_theme.transitions.create('transform', {
-      duration: ev_theme.transitions.duration.shortest,
+    transition: evTheme.transitions.create('transform', {
+      duration: evTheme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: ev_theme.palette.primary.main,
+    backgroundColor: evTheme.palette.primary.main,
   },
   phone: {
     color: 'inherit',

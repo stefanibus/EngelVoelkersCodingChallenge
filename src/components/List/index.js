@@ -3,7 +3,7 @@ import Box                              from '@material-ui/core/Box';
 import Checkbox                         from '@material-ui/core/Checkbox';
 import SimpleCard                       from './SimpleCard';
 import { useTheme }                     from '@material-ui/core/styles';
-import all_data                         from  '../../assets/dummydata.js';
+import spinnerLoadingData               from  '../../assets/dummydata.js';
 import SearchForName                    from './SearchForName';
 import FormControlLabel                 from '@material-ui/core/FormControlLabel';
 import SortByAlphaIcon                  from '@material-ui/icons/SortByAlpha';
@@ -16,9 +16,9 @@ function List() {
   const [checkedAgents, setCheckedAgents] = useState(true);
   const [checkedShops, setCheckedShops] = useState(true);
   const [checkedProperties, setCheckedProperties] = useState(true);
-  const [full_data, setFull_data] = useState(all_data); //
-  const [resultList, setResultList] = useState( all_data );  //
-  const [filteredList, setFilteredList] = useState( all_data ); //
+  const [fullData, setFullData] = useState(spinnerLoadingData); //
+  const [resultList, setResultList] = useState( spinnerLoadingData );  //
+  const [filteredList, setFilteredList] = useState( spinnerLoadingData ); //
   const [inputValue, setInputValue]   = useState('')
   const [listOfNames, setListOfNames] = useState([]);
   const [sorting, setSorting] = useState(false);
@@ -31,13 +31,13 @@ function List() {
 
 
   useEffect(   () => {
-     Api.getAllData().then(setFull_data) // equals to ==>  Api.getAllData().then( (res) => {setFull_data(res)});
+     Api.getAllData().then(setFullData) // equals to ==>  Api.getAllData().then( (res) => {setFullData(res)});
   }, []);
 
   useEffect(() => {
-      setResultList(full_data)
-      setFilteredList(full_data)
-  }, [full_data]);
+      setResultList(fullData)
+      setFilteredList(fullData)
+  }, [fullData]);
 
 
 
@@ -54,7 +54,7 @@ function List() {
      // all Three Checkboxes are checked
     if (( checkedAgents === true) &&  ( checkedShops === true) &&  ( checkedProperties === true) )  {
        // Show the full list if all types are selected
-       setFilteredList(full_data)
+       setFilteredList(fullData)
     }
      // none of the three checkboxes are selected
     else if ((!checkedAgents === true) &&  (!checkedShops === true) &&  (!checkedProperties === true) ) {
@@ -67,14 +67,14 @@ function List() {
            let shops      =  () => {if (checkedShops)      { return 'shop' } else {return  'ExcludeShopData' }}
            let properties =  () => {if (checkedProperties) { return 'property' } else {return  'ExcludePropertyData' }}
            // filter
-           let result =    full_data.mergedArray.filter(function (item) {
+           let result =    fullData.mergedArray.filter(function (item) {
                   return  (item.type ===   agents()   || item.type ===  shops()   || item.type ===  properties()  );
                 });
            await setFilteredList({'mergedArray' :  result})
          }
         fetchData();
     }
-  }, [checkedAgents, checkedShops , checkedProperties, full_data.whenToUpdateProp]);
+  }, [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
 
 
 
@@ -104,7 +104,7 @@ function List() {
         };
 
 
-    const useStyles = makeStyles((ev_theme) => ({
+    const useStyles = makeStyles((evTheme) => ({
       sorting: {
         textAlign: 'right',
         maxWidth: '645px',

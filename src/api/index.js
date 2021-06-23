@@ -31,8 +31,8 @@ const Api = {
                   modifyData('property', resProperties);
 
                   const  concat = resAgents.data.concat(resShops.data, resProperties.data);
-                  const full_array =  {whenToUpdateProp: true, mergedArray: concat}
-                  return full_array
+                  const fullArray =  {whenToUpdateProp: true, mergedArray: concat}
+                  return fullArray
                 }
                 )
               )
