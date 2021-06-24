@@ -40,7 +40,6 @@ function List() {
   }, [fullData]);
 
 
-
   useEffect(() => {
    // refresh the Autocomplete-Dropdown Conten -->  ListOfNames
       setListOfNames(filteredList.mergedArray.map((generalName, index) =>
@@ -70,11 +69,9 @@ function List() {
          setFilteredList({'mergedArray' :  result})
     }
   },
-  // alternatively to disabling the esLinter for the below line to not print a warning-message in the console, I would have to establish useReducer instead of fullData
+  // to prevent the esLinter from printing a warning-message to the console, I would have to establish useReducer to avoid using fullData (alternative to below "eslint-disable Approach" )
   // eslint-disable-next-line react-hooks/exhaustive-deps
   [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
-
-
 
 
   // apply Iputfield-Data from Autocomplete Dropdown
