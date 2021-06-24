@@ -19,10 +19,6 @@ import Store              from '@material-ui/icons/Home';
 import Home               from '@material-ui/icons/Store';
 import HelpIcon           from '@material-ui/icons/Help';
 
-
-
-
-
 const useStyles = makeStyles((evTheme) => ({
   root: {
     maxWidth: 645,
@@ -51,16 +47,12 @@ const useStyles = makeStyles((evTheme) => ({
     color: 'lightgrey',
     opacity: '.4',
   },
-  noInfo: {
-    display: 'none',
-  },
   mtMinus5: {
       marginTop: '-5px',
   },
 }));
 
 function SimpleCard({dummy}) {
-
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -72,11 +64,11 @@ function SimpleCard({dummy}) {
   const avatarType = (type) => { // replaced Switch Statement by an object, that was inspired by:  https://stackoverflow.com/questions/6114210/is-returning-out-of-a-switch-statement-considered-a-better-practice-than-using-b
     return (({
       'agent':  <Person alt="agent" /> ,
-      'shop':  <Home  alt="shop" /> ,
-      'property':  <Store  alt="property" />
+      'shop':  <Home alt="shop" /> ,
+      'property': <Store alt="property" />
     })[type] ?? <HelpIcon />)
   }
-
+  // style the Date-Information
   const dateShow = (d) => {
       const res = d.substring(0, 10);
       return(res);
@@ -85,51 +77,38 @@ function SimpleCard({dummy}) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} >
-           {avatarType(dummy.type)}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        avatar={ <Avatar aria-label="recipe" className={classes.avatar} > {avatarType(dummy.type)} </Avatar> }
+        action={ <IconButton aria-label="settings"> <MoreVertIcon /> </IconButton> }
         title={dummy.name}
         subheader={dateShow(dummy.createdAt)}
       />
       <CardContent>
-        {dummy.address ?
+        {dummy.address &&
             <Typography variant="body2" color="textSecondary" component="p">
-                 {'Postal Adress: '+dummy.address}
+                {'Postal Adress: '+dummy.address}
             </Typography>
-          :  <span className={classes.noInfo}>No Postal Adress </span>
         }
-
-        {dummy.shop ?
+        {dummy.shop &&
             <Typography variant="body2" color="textSecondary" component="p">
-                 {'Shop Information: '+dummy.shop}
+                {'Shop Information: '+dummy.shop}
             </Typography>
-          : <span className={classes.noInfo}>No Shop Adress</span>
         }
       </CardContent>
       <CardActions disableSpacing className={classes.mtMinus5 } >
         <IconButton aria-label="add to favorites">
             <Tooltip title="no func here" enterDelay={400} leaveDelay={200}>
-               <FavoriteIcon />
+              <FavoriteIcon />
             </Tooltip>
         </IconButton>
-      {dummy.phone ?
-        <IconButton aria-label="share">
-            <Tooltip title="Call now" enterDelay={400} leaveDelay={200}>
-              <a href={'tel:'+dummy.phone} className={classes.phone}  >
-                <PhoneForwardedIcon   />
-              </a>
-            </Tooltip>
-        </IconButton>
-        : ''
-      }
-
+        {dummy.phone &&
+          <IconButton aria-label="share">
+              <Tooltip title="Call now" enterDelay={400} leaveDelay={200}>
+                <a href={'tel:'+dummy.phone} className={classes.phone}  >
+                  <PhoneForwardedIcon   />
+                </a>
+              </Tooltip>
+          </IconButton>
+        }
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -143,15 +122,9 @@ function SimpleCard({dummy}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-               {dummy.phone ?  `Phone Number:  ${dummy.phone}.` : <span className={classes.blurredInfo}>No Phone Number available for  {dummy.type}-Members.</span> }
-          </Typography>
-          <Typography paragraph>
-               {dummy.address ?  <span className={classes.blurredInfo}>See above for Postal Adress.</span>  : <span className={classes.blurredInfo}>No Adress available for {dummy.type}-Members.</span> }
-          </Typography>
-          <Typography paragraph>
-               {dummy.shop ?  <span className={classes.blurredInfo}>See above for Shop Info.</span> :  <span className={classes.blurredInfo}>No Shop-Info available for {dummy.type}-Members.</span> }
-          </Typography>
+           {dummy.phone   && <Typography paragraph> Phone Number: {dummy.phone}. </Typography>}
+           {dummy.shop    && <Typography paragraph> <span className={classes.blurredInfo}>See above for Shop Info.</span></Typography> }
+           {dummy.address && <Typography paragraph> <span className={classes.blurredInfo}>See above for Postal Adress.</span> </Typography> }
         </CardContent>
       </Collapse>
     </Card>

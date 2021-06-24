@@ -10,7 +10,7 @@ const evTheme = createMuiTheme({
       overrides: {
       MuiCardHeader: {
         root: {
-          padding: 13,
+          padding: 15,
           "&:last-child": {
             paddingBottom: 0,
          },
