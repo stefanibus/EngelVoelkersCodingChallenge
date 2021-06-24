@@ -2,11 +2,12 @@ import CssBaseline    from '@material-ui/core/CssBaseline';
 import Container      from '@material-ui/core/Container';
 import Header         from './components/Header';
 import List           from './components/List';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
+
 import './App.css';
 
 
-const evTheme = createMuiTheme({
+const evTheme = unstable_createMuiStrictModeTheme({
       overrides: {
       MuiCardHeader: {
         root: {
