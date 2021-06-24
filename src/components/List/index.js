@@ -16,9 +16,9 @@ function List() {
   const [checkedAgents, setCheckedAgents] = useState(true);
   const [checkedShops, setCheckedShops] = useState(true);
   const [checkedProperties, setCheckedProperties] = useState(true);
-  const [fullData, setFullData] = useState(spinnerLoadingData); //
-  const [resultList, setResultList] = useState( spinnerLoadingData );  //
-  const [filteredList, setFilteredList] = useState( spinnerLoadingData ); //
+  const [fullData, setFullData] = useState(spinnerLoadingData);
+  const [resultList, setResultList] = useState(spinnerLoadingData);
+  const [filteredList, setFilteredList] = useState(spinnerLoadingData);
   const [inputValue, setInputValue]   = useState('')
   const [listOfNames, setListOfNames] = useState([]);
   const [sorting, setSorting] = useState(false);
@@ -51,11 +51,9 @@ function List() {
 
 
   useEffect(  () => {
-     // all Three Checkboxes are checked
     if ((checkedAgents) && (checkedShops) && (checkedProperties))  {
        setFilteredList(fullData)
     }
-     // none of the three checkboxes are selected
     else if ((!checkedAgents) && (!checkedShops) && (!checkedProperties)) {
        setFilteredList({'mergedArray' :  [] })
     }
@@ -71,7 +69,10 @@ function List() {
             });
          setFilteredList({'mergedArray' :  result})
     }
-  }, [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
+  },
+  // alternatively to disabling the esLinter for the below line to not print a warning-message in the console, I would have to establish useReducer instead of fullData
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
 
 
 

@@ -20,10 +20,10 @@ const Api = {
                   const resProperties = responses[2];
 
                   const modifyData = (typeInfo, array) => {
-
-                    array.data.map((iteration, index) =>    {
+                      array.data.map((iteration, index) => {
                         iteration['type'] = typeInfo
                         iteration['id'] = iteration.id+'-'+typeInfo
+                        return iteration
                       })
                   }
                   modifyData('agent', resAgents);
