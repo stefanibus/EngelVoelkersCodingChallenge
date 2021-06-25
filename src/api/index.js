@@ -19,21 +19,22 @@ const Api = {
                   const resShops      = responses[1];
                   const resProperties = responses[2];
 
-                  const modifyData = (typeInfo, array) => {
-                      array.data.map((iteration, index) => {
+                  const processData = (typeInfo, array) => {
+
+                      array.data.forEach((iteration, index) => {
                         iteration['type'] = typeInfo
                         iteration['id'] = iteration.id+'-'+typeInfo
-                        return iteration
                       })
                   }
-                  modifyData('agent', resAgents);
-                  modifyData('shop', resShops);
-                  modifyData('property', resProperties);
 
-                  const  concat = resAgents.data.concat(resShops.data, resProperties.data);
-                  const fullArray =  {whenToUpdateProp: true, mergedArray: concat}
+                  processData('agent', resAgents);
+                  processData('shop', resShops);
+                  processData('property', resProperties);
+                  const concat = resAgents.data.concat(resShops.data, resProperties.data);
+
+                  const fullArray = { mergedArray: concat}
                   return fullArray
-                }
+                  }
                 )
               )
               .catch((err) => {

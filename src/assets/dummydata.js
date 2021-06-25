@@ -1,7 +1,6 @@
 
 
 const spinnerLoadingData = {
-whenToUpdateProp: true,
 mergedArray: [
     {
       "type": "agent",

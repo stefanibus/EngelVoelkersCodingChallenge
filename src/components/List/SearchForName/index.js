@@ -34,8 +34,9 @@ function SearchForName({listOfNames, showSearchResult, setInputValue, inputValue
       // inputValue={inputValue?   inputValue.name : ''}
       options={options.sort((a, b) => -b.typeGroup)}
       groupBy={(option) => option.typeGroup}
-      key={listOfNames}
+      key={listOfNames} // this might be considered a workaround: it resets the Dropdown on render, which is desired here
       getOptionLabel={(option) => option.name}
+      getOptionSelected={(option, value) => option.name === value.name}
       onChange={(event, newInputValue) => {
         setInputValue(newInputValue)
         showSearchResult(newInputValue);

@@ -31,7 +31,7 @@ function List() {
 
 
   useEffect(   () => {
-     Api.getAllData().then(setFullData) // equals to ==>  Api.getAllData().then( (res) => {setFullData(res)});
+     Api.getAllData().then(setFullData) // equals to ==>  Api.getAllData().then( (res) => setFullData(res) );
   }, []);
 
   useEffect(() => {
@@ -50,10 +50,10 @@ function List() {
 
 
   useEffect(  () => {
-    if ((checkedAgents) && (checkedShops) && (checkedProperties))  {
+    if ( checkedAgents && checkedShops && checkedProperties )  {
        setFilteredList(fullData)
     }
-    else if ((!checkedAgents) && (!checkedShops) && (!checkedProperties)) {
+    else if ( !checkedAgents && !checkedShops && !checkedProperties ) {
        setFilteredList({'mergedArray' :  [] })
     }
      // only some types are selected --> Show a filtered list ;
@@ -69,9 +69,9 @@ function List() {
          setFilteredList({'mergedArray' :  result})
     }
   },
-  // to prevent the esLinter from printing a warning-message to the console, I would have to establish useReducer to avoid using fullData (alternative to below "eslint-disable Approach" )
+// to prevent the esLinter from printing a warning-message to the console, I would have to establish useReducer to avoid using fullData in a stateless way (happens after fullData is updated) (I used below "eslint-disable Approach" alternatively  )
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  [checkedAgents, checkedShops , checkedProperties, fullData.whenToUpdateProp]);
+   [checkedAgents, checkedShops , checkedProperties ]);
 
 
   // apply Iputfield-Data from Autocomplete Dropdown
