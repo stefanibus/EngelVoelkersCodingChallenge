@@ -1,58 +1,79 @@
 {
-  "ignorePatterns": ["reportWebVitals.js"],
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "rules": {
-    // "semi": "error",
-    // "react/prop-types": "warn",
-    // "react/jsx-uses-react": "error",
-    // "react/jsx-uses-vars": "error"
-  },
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
-  },
-  "globals": {
-    "Promise": "off",
-    "document": false
-  },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react", "react-hooks"],
-  "settings": {
-    "react": {
-      "createClass": "createReactClass", // Regex for Component Factory to use,
-      // default to "createReactClass"
-      "pragma": "React", // Pragma to use, default to "React"
-      "fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
-      "version": "detect", // React version. "detect" automatically picks the version you have installed.
-      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
-      // default to latest and warns if missing
-      // It will default to "detect" in the future
-      "flowVersion": "0.53" // Flow version
+    "env":{
+       "browser":true,
+       "es2021":true
     },
-    "propWrapperFunctions": [
-      // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
-      "forbidExtraProps",
-      { "property": "freeze", "object": "Object" },
-      { "property": "myFavoriteWrapper" }
+    "extends":[
+       "plugin:react/recommended",
+       "airbnb",
+       "plugin:@typescript-eslint/recommended",
+       "prettier",
+       "plugin:prettier/recommended"
     ],
-    "componentWrapperFunctions": [
-      // The name of any function used to wrap components, e.g. Mobx `observer` function. If this isn't set, components wrapped by these functions will be skipped.
-      "observer", // `property`
-      { "property": "styled" }, // `object` is optional
-      { "property": "observer", "object": "Mobx" },
-      { "property": "observer", "object": "<pragma>" } // sets `object` to whatever value `settings.react.pragma` is set to
+    "parser":"@typescript-eslint/parser",
+    "parserOptions":{
+       "ecmaFeatures":{
+          "jsx":true
+       },
+       "ecmaVersion":12,
+       "sourceType":"module"
+    },
+    "plugins":[
+       "react",
+       "@typescript-eslint"
     ],
-    "linkComponents": [
-      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
-      "Hyperlink",
-      { "name": "Link", "linkAttribute": "to" }
-    ]
-  }
-}
+    "rules":{
+       "strict":2,
+       "no-unused-vars":2,
+       "@typescript-eslint/no-unused-vars":2,
+       "no-use-before-define":"off",
+       "@typescript-eslint/no-use-before-define":[
+          "error"
+       ],
+       "import/extensions":[
+          "error",
+          "ignorePackages",
+          {
+             "ts":"never",
+             "tsx":"never"
+          }
+       ],
+       "react/react-in-jsx-scope":"off",
+       "react/jsx-filename-extension":[
+          1,
+          {
+             "extensions":[
+                ".js",
+                ".jsx",
+                ".tsx"
+             ]
+          }
+       ],
+       "no-shadow":"off",
+       "@typescript-eslint/no-shadow":[
+          "error"
+       ],
+       "@typescript-eslint/explicit-function-return-type":[
+          "error",
+          {
+             "allowExpressions":true,
+             "allowTypedFunctionExpressions":true
+          }
+       ],
+       "max-len":[
+          "warn",
+          {
+             "code":80
+          }
+       ],
+       "import/prefer-default-export":"off",
+       "react/prop-types":"off"
+    },
+    "settings":{
+       "import/resolver":{
+          "typescript":{
+             
+          }
+       }
+    }
+ }

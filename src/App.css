@@ -1,7 +1,7 @@
 html {
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-  }
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
 
 .App {
   text-align: center;
@@ -44,9 +44,8 @@ html {
 }
 
 .hr {
-    border-top: 1px solid rgb(255, 0, 0);
-    border-bottom: none;
-    width: 10.625rem;
-    margin: 6.25rem auto;
-  }
-
+  border-top: 1px solid rgb(255, 0, 0);
+  border-bottom: none;
+  width: 10.625rem;
+  margin: 6.25rem auto;
+}
