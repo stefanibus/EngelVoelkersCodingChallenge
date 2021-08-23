@@ -4,21 +4,25 @@
 
 - [React](https://reactjs.org/)
 - [material-ui](https://material-ui.com)
-- [jest](https://jestjs.io/)
 - [typescript](https://www.typescriptlang.org/)
 - [eslint](https://eslint.org/docs/user-guide/getting-started)
 - [husky & lint-staged](https://codeburst.io/continuous-integration-lint-staged-husky-pre-commit-hook-test-setup-47f8172924fc)
+- [jest](https://jestjs.io/)
 
 ###### Online Demo on Netlify: https://csb-7ujc7.netlify.app/
 
 ## Front-End Coding Challenge
 
-Please read the definition of the Challenge:
-[Google Doc: Definition of the Challenge & reference to 3 API-Requests](https://docs.google.com/document/d/1BXD-eZURPT36kGZyk_Zw5kRn92jtqNkFzg59RYABZPI/)
-
 This web-app enables the user to search for shops, properties and agents in a unified list view. The unified list is sortable by name and filterable by type.
 
-## Preview
+## Challenge Definition
+
+Please read the definition of the Challenge here:
+[Google Doc: Definition of the Challenge & reference to 3 API-Requests](https://docs.google.com/document/d/1BXD-eZURPT36kGZyk_Zw5kRn92jtqNkFzg59RYABZPI/)
+
+## Netlify Demo
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ###### Online Demo on Netlify: https://csb-7ujc7.netlify.app/
 
