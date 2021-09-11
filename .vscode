@@ -1,9 +1,27 @@
 {
-  "files.associations": {
-    "*.jsx": "javascriptreact"
-  },
-"editor.defaultFormatter": "dbaeumer.vscode-eslint",
-"editor.formatOnSave": true,
-"eslint.alwaysShowStatus": true,
-"editor.codeActionsOnSave": { "source.fixAll.eslint": true }
+   "files.associations":{
+      "*.jsx":"javascriptreact"
+   },
+   "editor.defaultFormatter":"dbaeumer.vscode-eslint",
+   "eslint.enable":true,
+   "editor.formatOnSave":true,
+   "eslint.alwaysShowStatus":true,
+   "editor.codeActionsOnSave":{
+      "source.fixAll.eslint":true
+   },
+   "editor.wordWrap":"wordWrapColumn",
+   "editor.wordWrapColumn":80,
+   "editor.wrappingStrategy":"advanced",
+   "eslint.validate":[
+      "javascript",
+      "javascriptreact",
+      {
+         "language":"typescript",
+         "autoFix":true
+      },
+      {
+         "language":"typescriptreact",
+         "autoFix":true
+      }
+   ]
 }
